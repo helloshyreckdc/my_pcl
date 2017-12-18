@@ -271,6 +271,10 @@ target_link_libraries(general_matrix_transform ${PCL_LIBRARIES} libvtkCommon.so 
 add_executable(publish_transform_matrix_from_scene src/publish_transform_matrix_from_scene.cpp)
 target_link_libraries(publish_transform_matrix_from_scene ${catkin_LIBRARIES})
 target_link_libraries(publish_transform_matrix_from_scene ${PCL_LIBRARIES} libvtkCommon.so libvtkFiltering.so)
+
+add_executable(publish_cube5cm src/publish_cube5cm.cpp)
+target_link_libraries(publish_cube5cm ${catkin_LIBRARIES})
+target_link_libraries(publish_cube5cm ${PCL_LIBRARIES} libvtkCommon.so libvtkFiltering.so)
 #list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 #
 #	find_package(HDF5)
