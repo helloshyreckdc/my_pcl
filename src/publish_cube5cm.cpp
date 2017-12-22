@@ -76,7 +76,7 @@ void handlePointCallback(const pcl::PCLPointCloud2ConstPtr& cloud)
 		pass.setFilterLimits (0.4, 0.8);   */
 	//pass.setFilterLimitsNegative (true);
 	pass.filter (*cloud_out_filtered);
-	pcl::io::savePCDFileASCII ("test_scene.pcd", *cloud_out_filtered);
+//	pcl::io::savePCDFileASCII ("./temp/test_scene.pcd", *cloud_out_filtered);
 
 
 	// planar segmentation 
@@ -132,7 +132,7 @@ void handlePointCallback(const pcl::PCLPointCloud2ConstPtr& cloud)
 	sor2.setStddevMulThresh (1);
 	sor2.filter (*cloud_filtered);
 
-	pcl::io::savePCDFileASCII ("final.pcd", *cloud_filtered);
+	pcl::io::savePCDFileASCII ("./temp/final.pcd", *cloud_filtered);
 	/*	seg.setInputCloud (cloud_out_filtered);
 		seg.segment (*inliers, *coefficients);
 
@@ -144,9 +144,9 @@ void handlePointCallback(const pcl::PCLPointCloud2ConstPtr& cloud)
 	pcl::io::savePCDFileASCII ("test_scene_without_planar.pcd", *cloud_out_final);
 	 */
 	
-	icp.setMaximumIterations (50);
-	icp.setInputSource (cloud_filtered);
-	icp.setInputTarget(cloud_in);
+	icp.setMaximumIterations (250);
+	icp.setInputSource (cloud_in);
+	icp.setInputTarget(cloud_filtered);
 	pcl::PointCloud<pcl::PointXYZ> Final;
 	icp.align(Final);
 	std::cout << "has converged:" << icp.hasConverged() << " score: " <<
@@ -209,6 +209,7 @@ int main(int argc, char **argv)
 
 	std::cout << Tm  << std::endl;
 	pcl::transformPointCloud (*cloud_in, *transformed_cloud, Tm);
+	pcl::io::savePCDFileASCII ("./temp/transformed_cloud.pcd", *transformed_cloud);
 
 	tf::Quaternion tfqt;
 	tf3d.getRotation(tfqt);
