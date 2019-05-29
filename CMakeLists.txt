@@ -208,6 +208,9 @@ add_definitions(${PCL_DEFINITIONS})
 add_executable(passthrough src/passthrough.cpp)
 target_link_libraries(passthrough ${catkin_LIBRARIES})
 
+add_executable(crophull src/crophull.cpp)
+target_link_libraries(crophull ${catkin_LIBRARIES})
+
 	add_executable(voxel_grid src/voxel_grid.cpp)
 target_link_libraries(voxel_grid ${catkin_LIBRARIES})
 
